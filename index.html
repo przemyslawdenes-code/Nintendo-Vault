@@ -1,84 +1,151 @@
 <!doctype html>
 <html lang="pl">
 <head>
-<meta name="theme-color" content="#e60012">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Nintendo Vault">
-<link rel="manifest" href="data:application/manifest+json,{&quot;name&quot;:&quot;Nintendo%20Vault&quot;,&quot;short_name&quot;:&quot;Nintendo%20Vault&quot;,&quot;start_url&quot;:&quot;.&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;%230b0d12&quot;,&quot;theme_color&quot;:&quot;%23e60012&quot;,&quot;icons&quot;:[]}">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nintendo Vault — Kolekcja gier pudełkowych</title>
+<title>Nintendo Vault V3</title>
 <style>
-:root{--bg:#0b0d12;--panel:#12151d;--panel2:#181c26;--text:#f5f7fb;--muted:#9aa3b2;--line:#292f3b;--accent:#e60012;--accent2:#ff3344;--good:#39d98a;--gold:#f3c969;--shadow:0 18px 50px #0007}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}.app{min-height:100vh;background:radial-gradient(circle at 85% -10%,#4b0a13 0,#0b0d12 34%)}
-header{position:sticky;top:0;z-index:5;border-bottom:1px solid var(--line);background:#0b0d12eF;backdrop-filter:blur(18px)}.nav{max-width:1280px;margin:auto;padding:16px 22px;display:flex;align-items:center;gap:22px}.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;letter-spacing:-.5px}.mark{width:30px;height:30px;border-radius:9px;background:var(--accent);display:grid;place-items:center;font-weight:900;box-shadow:0 5px 18px #e6001244}.navlinks{display:flex;gap:5px;margin-left:auto}.navlinks button,.ghost{border:1px solid transparent;background:transparent;color:var(--muted);padding:9px 12px;border-radius:9px;cursor:pointer}.navlinks button.active,.navlinks button:hover,.ghost:hover{color:var(--text);background:var(--panel2)}.primary{border:0;background:var(--accent);color:white;padding:10px 15px;border-radius:9px;font-weight:750;cursor:pointer}.primary:hover{background:var(--accent2)}
-main{max-width:1280px;margin:auto;padding:30px 22px 60px}.hero{display:flex;justify-content:space-between;align-items:flex-end;gap:25px;margin-bottom:25px}.eyebrow{color:#ff6c78;text-transform:uppercase;font-weight:800;letter-spacing:1.5px;font-size:11px}.hero h1{font-size:38px;line-height:1.05;margin:6px 0}.hero p{color:var(--muted);margin:0;max-width:650px}.hero-actions{display:flex;gap:9px;flex-wrap:wrap}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0}.stat{background:linear-gradient(145deg,#151923,#10131a);border:1px solid var(--line);border-radius:15px;padding:17px;box-shadow:var(--shadow)}.stat .label{color:var(--muted);font-size:12px}.stat .value{font-size:26px;font-weight:850;margin:5px 0}.stat .sub{font-size:11px;color:var(--muted)}
-.toolbar{display:flex;gap:9px;align-items:center;margin:20px 0;flex-wrap:wrap}.search{flex:1;min-width:240px;background:var(--panel);border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 13px;outline:none}.search:focus{border-color:#697386}.select{background:var(--panel);color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px}.count{margin-left:auto;color:var(--muted);font-size:12px}
-.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.card{background:var(--panel);border:1px solid var(--line);border-radius:15px;overflow:hidden;transition:.2s;cursor:pointer;position:relative}.card:hover{transform:translateY(-3px);border-color:#454d5d;box-shadow:var(--shadow)}.cover{aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:space-between;padding:12px;position:relative;overflow:hidden;background:linear-gradient(145deg,#303846,#11151c)}.cover:after{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at 70% 30%,#ffffff24,transparent 32%);transform:rotate(15deg)}.cover.red{background:linear-gradient(150deg,#e60012,#57000a)}.cover.blue{background:linear-gradient(150deg,#0878b8,#071c42)}.cover.green{background:linear-gradient(150deg,#198c54,#092d20)}.cover.gold{background:linear-gradient(150deg,#c08b22,#332008)}.cover.purple{background:linear-gradient(150deg,#7b45bb,#241044)}.platform{font-size:9px;font-weight:900;letter-spacing:1px;z-index:1}.cover-title{font-size:23px;font-weight:950;line-height:.95;max-width:90%;z-index:1;text-shadow:0 2px 8px #0009}.cover-sub{font-size:10px;opacity:.8;z-index:1}.badge{position:absolute;top:10px;right:10px;z-index:2;background:#0b0d12dd;border:1px solid #ffffff22;padding:4px 7px;border-radius:20px;font-size:9px;font-weight:800}.info{padding:12px}.title{font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:5px}.status{margin-top:9px;font-size:10px;color:var(--good);font-weight:750}.wishlist{color:var(--gold)}
-.empty{padding:60px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:15px;grid-column:1/-1}.section-title{display:flex;align-items:center;justify-content:space-between;margin:30px 0 12px}.section-title h2{margin:0;font-size:19px}.section-title span{font-size:12px;color:var(--muted)}
-.modal{position:fixed;inset:0;background:#0009;display:none;align-items:center;justify-content:center;z-index:20;padding:20px}.modal.open{display:flex}.dialog{width:min(520px,100%);background:#141821;border:1px solid var(--line);border-radius:17px;box-shadow:0 30px 100px #000b;padding:22px}.dialog h2{margin:0 0 18px}.form{display:grid;gap:12px}.form label{font-size:11px;color:var(--muted)}.form input,.form select{width:100%;margin-top:5px;background:#0d1016;color:var(--text);border:1px solid var(--line);border-radius:9px;padding:11px}.formrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
-.detail{display:none}.detail.open{display:block}.detailbox{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:20px;margin-bottom:20px}.back{color:var(--muted);cursor:pointer;margin-bottom:14px}.detailgrid{display:grid;grid-template-columns:220px 1fr;gap:22px}.bigcover{aspect-ratio:3/4;border-radius:12px;padding:18px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(150deg,#e60012,#450008);font-size:34px;font-weight:950}.detail h2{font-size:30px;margin:0 0 5px}.chips{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.chip{border:1px solid var(--line);background:#0d1016;padding:6px 9px;border-radius:99px;font-size:11px;color:var(--muted)}
-@media(max-width:1000px){.grid{grid-template-columns:repeat(4,1fr)}}@media(max-width:760px){.navlinks{display:none}.hero{display:block}.hero-actions{margin-top:15px}.stats{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:repeat(2,1fr)}.detailgrid{grid-template-columns:1fr}.bigcover{max-width:220px}.count{margin-left:0}}
+:root{--bg:#f4f5f7;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#e60012;--dark:#111827;--good:#15803d;--warn:#b45309}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:14px 16px}
+.brand{display:flex;align-items:center;justify-content:space-between}.brand h1{font-size:20px;margin:0}.brand small{color:var(--muted)}
+main{max-width:900px;margin:auto;padding:16px 16px 92px}.hero{background:var(--dark);color:white;border-radius:22px;padding:20px;margin-bottom:16px}.hero h2{margin:0 0 5px;font-size:27px}.hero p{margin:0;color:#cbd5e1}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:14px}.stat b{display:block;font-size:22px;margin-top:4px}.muted{color:var(--muted)}
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:7px max(7px,env(safe-area-inset-left)) calc(7px + env(safe-area-inset-bottom))}
+.tab{border:0;background:none;padding:7px 3px;color:var(--muted);font-size:11px}.tab.active{color:var(--accent);font-weight:700}.tab span{display:block;font-size:21px;margin-bottom:2px}
+.section{margin:18px 0 10px;display:flex;align-items:center;justify-content:space-between}.section h3{margin:0;font-size:18px}
+button,.button{border:0;border-radius:12px;padding:11px 14px;background:var(--dark);color:white;font-weight:650}.button.red{background:var(--accent)}button.secondary{background:#eef0f3;color:var(--text)}button.danger{background:#fee2e2;color:#991b1b}
+.list{display:grid;gap:10px}.item{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:13px;display:flex;gap:12px}.cover{width:64px;height:84px;border-radius:9px;background:#e5e7eb;display:grid;place-items:center;overflow:hidden;flex:none}.cover img{width:100%;height:100%;object-fit:cover}.itemmain{min-width:0;flex:1}.itemtitle{font-weight:750;font-size:16px}.chips{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0}.chip{background:#f1f5f9;border-radius:999px;padding:4px 7px;font-size:11px}.price{font-weight:750}.row{display:flex;gap:8px;align-items:center;justify-content:space-between}.actions{display:flex;gap:6px;margin-top:8px}.actions button{padding:7px 9px;font-size:12px}
+input,select,textarea{width:100%;border:1px solid #d1d5db;background:white;border-radius:11px;padding:11px;font:inherit;color:var(--text)}textarea{min-height:80px;resize:vertical}label{font-size:12px;font-weight:650;color:#374151;display:block;margin:10px 0 5px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.full{grid-column:1/-1}
+.searchbar{display:flex;gap:8px}.searchbar input{flex:1}.empty{padding:28px;text-align:center;color:var(--muted);background:white;border:1px dashed #d1d5db;border-radius:17px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;display:none;align-items:flex-end}.overlay.open{display:flex}.sheet{background:white;width:100%;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:18px 16px calc(28px + env(safe-area-inset-bottom))}.sheet h2{margin:0 0 8px}.close{float:right;background:#eef0f3;color:#111}
+.scanner{background:#050505;border-radius:18px;overflow:hidden;position:relative;margin:10px 0}.scanner video{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}.scanline{position:absolute;left:10%;right:10%;top:50%;height:2px;background:#fff}.scanstatus{color:#fff;text-align:center;padding:8px;font-size:13px}
+.toast{position:fixed;left:50%;bottom:85px;transform:translateX(-50%);background:#111827;color:white;padding:10px 15px;border-radius:999px;z-index:200;display:none}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}.tabs{position:static;max-width:900px;margin:auto;border:0;background:none}.tab{font-size:13px}.tab span{display:inline;margin-right:5px}main{padding-bottom:20px}.overlay{align-items:center;justify-content:center}.sheet{max-width:650px;border-radius:22px}}
+</style>
+<script src="https://unpkg.com/html5-qrcode" defer></script>
+</head>
+<body>
+<header><div class="brand"><div><h1>🎮 Nintendo Vault</h1><small>Kolekcjoner Edition · V3</small></div><button class="red" onclick="openForm()">＋ Dodaj</button></div></header>
+<main id="app"></main>
+<nav class="tabs">
+<button class="tab active" data-tab="home" onclick="showTab('home')"><span>⌂</span>Start</button>
+<button class="tab" data-tab="collection" onclick="showTab('collection')"><span>🎮</span>Kolekcja</button>
+<button class="tab" data-tab="wishlist" onclick="showTab('wishlist')"><span>♥</span>Wishlist</button>
+<button class="tab" data-tab="tools" onclick="showTab('tools')"><span>⚙</span>Narzędzia</button>
+</nav>
 
-/* Mobile / PWA enhancements */
-@media (max-width: 700px){
-  body{overflow-x:hidden;}
-  .app{padding:14px!important;}
-  header{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);}
-  .grid,.games-grid,.stats-grid{grid-template-columns:1fr!important;}
-  .game-card{min-height:0;}
-  button,input,select{min-height:44px;}
-  .search{width:100%!important;}
-}
-.install-banner{position:fixed;left:12px;right:12px;bottom:12px;z-index:99;padding:14px 16px;border-radius:16px;background:#171a22;color:#fff;box-shadow:0 10px 40px #0008;display:none;align-items:center;gap:12px;border:1px solid #ffffff18}
-.install-banner button{margin-left:auto;border:0;border-radius:10px;padding:10px 14px;background:#e60012;color:#fff;font-weight:700}
-</style></head>
-<body><div class="app">
-<header><div class="nav"><div class="brand"><div class="mark">N</div>Nintendo Vault</div><div class="navlinks"><button class="active" data-view="collection">Kolekcja</button><button data-view="wishlist">Wishlist</button><button data-view="stats">Statystyki</button></div><button class="primary" id="addBtn">＋ Dodaj grę</button></div></header>
-<main>
-<section id="collectionView"><div class="hero"><div><div class="eyebrow">Physical Game Collector</div><h1>Twoja kolekcja. Jeden vault.</h1><p>Śledź pudełkowe gry Nintendo, stan kolekcji, zakupy i wishlistę. Dane zapisują się lokalnie w przeglądarce.</p></div><div class="hero-actions"><button class="ghost" id="exportBtn">Eksport JSON</button><button class="ghost" id="resetBtn">Reset demo</button></div></div>
-<div class="stats"><div class="stat"><div class="label">W kolekcji</div><div class="value" id="sCount">0</div><div class="sub">fizycznych wydań</div></div><div class="stat"><div class="label">Szacowana wartość</div><div class="value" id="sValue">0 zł</div><div class="sub">wartość zakupu</div></div><div class="stat"><div class="label">Kompletność</div><div class="value" id="sComplete">0%</div><div class="sub">na podstawie wpisanych serii</div></div><div class="stat"><div class="label">Wishlist</div><div class="value" id="sWish">0</div><div class="sub">gier do zdobycia</div></div></div>
-<div class="toolbar"><input class="search" id="search" placeholder="Szukaj po tytule, serii lub wydaniu…"><select class="select" id="platform"><option value="all">Wszystkie platformy</option><option>Switch</option><option>Switch 2</option></select><select class="select" id="status"><option value="all">Wszystkie</option><option value="owned">Posiadam</option><option value="wishlist">Wishlist</option></select><span class="count" id="count"></span></div>
-<div class="grid" id="grid"></div></section>
-<section class="detail" id="detailView"><div class="back" id="back">← Wróć do kolekcji</div><div class="detailbox"><div class="detailgrid"><div class="bigcover" id="dCover"><span id="dPlatform"></span><span id="dTitle"></span></div><div><div class="eyebrow">Game record</div><h2 id="dName"></h2><div class="chips" id="dChips"></div><p id="dNotes" style="color:var(--muted)"></p><div class="stats" style="grid-template-columns:repeat(3,1fr)"><div class="stat"><div class="label">Cena zakupu</div><div class="value" id="dPrice"></div></div><div class="stat"><div class="label">Stan</div><div class="value" id="dCondition"></div></div><div class="stat"><div class="label">Region</div><div class="value" id="dRegion"></div></div></div><button class="primary" id="toggleOwned">Zmień status</button></div></div></div></section>
-</main></div>
-<div class="modal" id="modal"><div class="dialog"><h2>Dodaj grę do vaulta</h2><div class="form"><label>Tytuł<input id="fTitle" placeholder="np. The Legend of Zelda: Tears of the Kingdom"></label><div class="formrow"><label>Platforma<select id="fPlatform"><option>Switch</option><option>Switch 2</option></select></label><label>Status<select id="fStatus"><option value="owned">Posiadam</option><option value="wishlist">Wishlist</option></select></label></div><div class="formrow"><label>Cena zakupu (zł)<input id="fPrice" type="number" value="0"></label><label>Stan<select id="fCondition"><option>Nowa</option><option>Mint</option><option>Używana</option></select></label></div><label>Seria / tag<input id="fSeries" placeholder="Zelda, Mario, Pokémon…"></label></div><div class="dialog-actions"><button class="ghost" id="cancel">Anuluj</button><button class="primary" id="save">Dodaj</button></div></div></div>
+<div class="overlay" id="formOverlay"><div class="sheet"><button class="close" onclick="closeForm()">✕</button><h2 id="formTitle">Dodaj grę</h2>
+<form id="gameForm">
+<input type="hidden" id="editId">
+<div class="formgrid">
+<div class="full"><label>Tytuł *</label><input id="title" required placeholder="np. The Legend of Zelda: Tears of the Kingdom"></div>
+<div><label>Platforma</label><select id="platform"><option>Switch</option><option>Switch 2</option><option>3DS</option><option>Wii U</option><option>Wii</option><option>DS</option><option>Game Boy</option><option>GameCube</option><option>Inne</option></select></div>
+<div><label>Region</label><select id="region"><option>PAL / EU</option><option>USA</option><option>Japan</option><option>UK</option><option>Inny</option></select></div>
+<div><label>Stan</label><select id="condition"><option>Used</option><option>New</option><option>Sealed</option></select></div>
+<div><label>Edycja</label><select id="edition"><option>Standard</option><option>Limited</option><option>Collector's</option><option>Special</option><option>Steelbook</option><option>Inna</option></select></div>
+<div><label>EAN / kod</label><input id="ean" inputmode="numeric" placeholder="np. 0454964201234"></div>
+<div><label>Cena zakupu (PLN)</label><input id="buy" type="number" step="0.01" min="0"></div>
+<div><label>Aktualna wartość (PLN)</label><input id="value" type="number" step="0.01" min="0"></div>
+<div><label>Data zakupu</label><input id="date" type="date"></div>
+<div><label>Priorytet</label><select id="priority"><option>Normalny</option><option>Wysoki</option><option>Must have</option></select></div>
+<div class="full"><label>Sklep / źródło</label><input id="shop" placeholder="np. Allegro, sklep, wymiana"></div>
+<div class="full"><label>Notatka</label><textarea id="notes"></textarea></div>
+<div class="full"><label>Zdjęcie pudełka</label><input id="photo" type="file" accept="image/*" capture="environment"></div>
+</div>
+<div class="actions" style="margin-top:15px"><button class="red" type="submit">Zapisz grę</button><button type="button" class="secondary" onclick="closeForm()">Anuluj</button></div>
+</form></div></div>
+
+<div class="overlay" id="scanOverlay"><div class="sheet"><button class="close" onclick="stopScanner()">✕</button><h2>📷 Skanuj kod kreskowy</h2><p class="muted">Skieruj aparat na EAN-13 / UPC znajdujący się na pudełku.</p>
+<div class="scanner"><video id="video" playsinline muted></video><div class="scanline"></div><div class="scanstatus" id="scanStatus">Uruchamianie aparatu…</div></div>
+<button class="secondary" onclick="manualScan()">Wpisz EAN ręcznie</button>
+</div></div>
+
+<div class="overlay" id="importOverlay"><div class="sheet"><button class="close" onclick="closeImport()">✕</button><h2>Import kolekcji</h2><p class="muted">Wybierz wcześniej wyeksportowany plik JSON.</p><input id="importFile" type="file" accept="application/json"><div class="actions"><button class="red" onclick="doImport()">Importuj</button></div></div></div>
+<div class="toast" id="toast"></div>
+
 <script>
-const demo=[
-{id:1,title:'The Legend of Zelda: Tears of the Kingdom',platform:'Switch',status:'owned',price:249,condition:'Mint',series:'Zelda',color:'green',region:'EU'},
-{id:2,title:'Super Mario Bros. Wonder',platform:'Switch',status:'owned',price:189,condition:'Mint',series:'Mario',color:'red',region:'EU'},
-{id:3,title:'Metroid Prime Remastered',platform:'Switch',status:'owned',price:159,condition:'Nowa',series:'Metroid',color:'blue',region:'EU'},
-{id:4,title:'Pokémon Legends: Z-A',platform:'Switch 2',status:'wishlist',price:299,condition:'Nowa',series:'Pokémon',color:'gold',region:'EU'},
-{id:5,title:'Mario Kart World',platform:'Switch 2',status:'owned',price:289,condition:'Mint',series:'Mario Kart',color:'red',region:'EU'},
-{id:6,title:'Kirby and the Forgotten Land',platform:'Switch',status:'owned',price:199,condition:'Używana',series:'Kirby',color:'purple',region:'EU'},
-{id:7,title:'Animal Crossing: New Horizons',platform:'Switch',status:'owned',price:179,condition:'Mint',series:'Animal Crossing',color:'blue',region:'EU'},
-{id:8,title:'The Legend of Zelda: Echoes of Wisdom',platform:'Switch',status:'wishlist',price:219,condition:'Nowa',series:'Zelda',color:'green',region:'EU'},
-{id:9,title:'Donkey Kong Bananza',platform:'Switch 2',status:'owned',price:269,condition:'Mint',series:'Donkey Kong',color:'gold',region:'EU'},
-{id:10,title:'Super Mario Odyssey',platform:'Switch',status:'owned',price:179,condition:'Mint',series:'Mario',color:'red',region:'EU'}];
-let games=JSON.parse(localStorage.getItem('nv_games')||'null')||demo;
-let current=null;
+const KEY='nintendo-vault-v3';
+let games=JSON.parse(localStorage.getItem(KEY)||'[]');
+let activeTab='home', scanStream=null, scanTimer=null;
+
 const $=id=>document.getElementById(id);
-function save(){localStorage.setItem('nv_games',JSON.stringify(games));}
-function cover(g){return `<div class="cover ${g.color||'blue'}"><span class="platform">${g.platform.toUpperCase()}</span><span class="cover-title">${esc(g.title)}</span><span class="cover-sub">PHYSICAL EDITION • ${g.region||'EU'}</span>${g.status==='wishlist'?'<span class="badge wishlist">WISHLIST</span>':'<span class="badge">OWNED</span>'}</div>`}
-function esc(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
-function render(){const q=$('search').value.toLowerCase(),p=$('platform').value,st=$('status').value;let list=games.filter(g=>(g.title+' '+g.series).toLowerCase().includes(q)&&(p==='all'||g.platform===p)&&(st==='all'||g.status===st));$('grid').innerHTML=list.length?list.map(g=>`<article class="card" data-id="${g.id}">${cover(g)}<div class="info"><div class="title">${esc(g.title)}</div><div class="meta"><span>${esc(g.series)}</span><span>${g.price?g.price+' zł':'—'}</span></div><div class="status ${g.status==='wishlist'?'wishlist':''}">${g.status==='wishlist'?'☆ Do zdobycia':'✓ W kolekcji'} · ${g.condition}</div></div></article>`).join(''):`<div class="empty">Brak gier pasujących do filtrów.</div>`;document.querySelectorAll('.card').forEach(c=>c.onclick=()=>openDetail(+c.dataset.id));$('count').textContent=`${list.length} pozycji`;
-let owned=games.filter(g=>g.status==='owned');$('sCount').textContent=owned.length;$('sValue').textContent=owned.reduce((a,g)=>a+(+g.price||0),0).toLocaleString('pl-PL')+' zł';$('sWish').textContent=games.filter(g=>g.status==='wishlist').length;let series=new Set(games.map(g=>g.series).filter(Boolean));$('sComplete').textContent=series.size?Math.min(100,Math.round(owned.length/Math.max(games.length,1)*100))+'%':'0%';}
-function openDetail(id){current=games.find(g=>g.id===id);if(!current)return;$('collectionView').style.display='none';$('detailView').classList.add('open');$('dCover').className='bigcover '+(current.color||'blue');$('dPlatform').textContent=current.platform.toUpperCase();$('dTitle').textContent=current.title;$('dName').textContent=current.title;$('dChips').innerHTML=[current.series,current.platform,current.status==='owned'?'Posiadam':'Wishlist'].map(x=>`<span class="chip">${esc(x)}</span>`).join('');$('dNotes').textContent='Rekord kolekcjonerski. W przyszłej wersji można tu dodać numer wydania, barcode/EAN, region, zdjęcia własne, DLC, steelbook, pierwszą cenę i aktualną wartość rynkową.');$('dPrice').textContent=(current.price||0)+' zł';$('dCondition').textContent=current.condition;$('dRegion').textContent=current.region||'EU';$('toggleOwned').textContent=current.status==='owned'?'Przenieś do wishlisty':'Oznacz jako posiadane';}
-$('back').onclick=()=>{$('detailView').classList.remove('open');$('collectionView').style.display='block';current=null};$('toggleOwned').onclick=()=>{current.status=current.status==='owned'?'wishlist':'owned';save();openDetail(current.id);render()};
-['search','platform','status'].forEach(id=>$(id).addEventListener('input',render));
-$('addBtn').onclick=()=>{$('modal').classList.add('open');$('fTitle').focus()};$('cancel').onclick=()=>$('modal').classList.remove('open');$('modal').onclick=e=>{if(e.target.id==='modal')$('modal').classList.remove('open')};$('save').onclick=()=>{let title=$('fTitle').value.trim();if(!title)return;$('modal').classList.remove('open');games.unshift({id:Date.now(),title,platform:$('fPlatform').value,status:$('fStatus').value,price:+$('fPrice').value||0,condition:$('fCondition').value,series:$('fSeries').value.trim()||'Inne',color:['red','blue','green','gold','purple'][Math.floor(Math.random()*5)],region:'EU'});save();render();$('fTitle').value='';$('fSeries').value='';};
-$('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify(games,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nintendo-vault.json';a.click();URL.revokeObjectURL(a.href)};$('resetBtn').onclick=()=>{if(confirm('Przywrócić przykładową kolekcję?')){games=demo.map(x=>({...x}));save();render()}};
-document.querySelectorAll('.navlinks button').forEach(b=>b.onclick=()=>{document.querySelectorAll('.navlinks button').forEach(x=>x.classList.remove('active'));b.classList.add('active');if(b.dataset.view==='collection'){ $('collectionView').style.display='block';$('detailView').classList.remove('open')}else if(b.dataset.view==='wishlist'){$('collectionView').style.display='block';$('detailView').classList.remove('open');$('status').value='wishlist';render()}else{alert('Statystyki rozszerzymy w kolejnym kroku — kolekcja jest już policzona w panelu powyżej.')}});
+const money=n=>new Intl.NumberFormat('pl-PL',{style:'currency',currency:'PLN',maximumFractionDigits:0}).format(Number(n)||0);
+const save=()=>localStorage.setItem(KEY,JSON.stringify(games));
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+function toast(t){$('toast').textContent=t;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2200)}
+function showTab(tab){activeTab=tab;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===tab));render()}
+function render(){
+ const total=games.reduce((s,g)=>s+(+g.value||0),0), invested=games.reduce((s,g)=>s+(+g.buy||0),0);
+ if(activeTab==='home') $('app').innerHTML=home(total,invested);
+ if(activeTab==='collection') $('app').innerHTML=listPage(false);
+ if(activeTab==='wishlist') $('app').innerHTML=listPage(true);
+ if(activeTab==='tools') $('app').innerHTML=toolsPage();
+}
+function home(total,invested){
+ const platforms={};games.forEach(g=>platforms[g.platform]=(platforms[g.platform]||0)+1);
+ const gain=total-invested;
+ return `<section class="hero"><h2>Twoja kolekcja</h2><p>Wszystko, co kolekcjonujesz, w jednym miejscu.</p></section>
+ <div class="grid"><div class="stat"><span class="muted">Gry</span><b>${games.length}</b></div><div class="stat"><span class="muted">Wartość</span><b>${money(total)}</b></div><div class="stat"><span class="muted">Zainwestowano</span><b>${money(invested)}</b></div><div class="stat"><span class="muted">Wzrost</span><b>${money(gain)}</b></div></div>
+ <div class="section"><h3>Ostatnio dodane</h3><button class="secondary" onclick="showTab('collection')">Wszystkie</button></div>
+ <div class="list">${games.slice().reverse().slice(0,5).map(card).join('')||'<div class="empty">Twoja kolekcja jest pusta.<br><br><button class="red" onclick="openForm()">Dodaj pierwszą grę</button></div>'}</div>
+ <div class="section"><h3>Platformy</h3></div><div class="chips">${Object.entries(platforms).map(([p,n])=>`<span class="chip">${esc(p)} · ${n}</span>`).join('')||'<span class="muted">Brak danych</span>'}</div>`;
+}
+function listPage(wish){
+ let arr=games.filter(g=>wish?g.wish:g.collection!==false);
+ return `<div class="section"><h3>${wish?'♥ Wishlist':'🎮 Moja kolekcja'}</h3><div style="display:flex;gap:6px"><button class="red" onclick="openForm(${wish})">＋</button>${wish?'':'<button class="secondary" onclick="startScanner()">📷</button>'}</div></div>
+ <div class="searchbar"><input id="search" placeholder="Szukaj tytułu, EAN, platformy…" oninput="filterList(${wish})"><button class="secondary" onclick="sortList()">↕</button></div>
+ <div id="results" class="list" style="margin-top:10px">${arr.map(card).join('')||`<div class="empty">${wish?'Wishlist jest pusta. Dodaj gry, które chcesz kupić.':'Nie masz jeszcze żadnych gier w kolekcji.'}</div>`}</div>`;
+}
+function filterList(wish){const q=($('search')?.value||'').toLowerCase();const arr=games.filter(g=>(wish?g.wish:g.collection!==false)&&[g.title,g.ean,g.platform,g.edition,g.region].join(' ').toLowerCase().includes(q));$('results').innerHTML=arr.map(card).join('')||'<div class="empty">Brak wyników.</div>'}
+function sortList(){if(games.length>1){games.reverse();save();render();toast('Zmieniono kolejność')}}
+function card(g){
+ return `<article class="item"><div class="cover">${g.photo?`<img src="${g.photo}" alt="">`:'🎮'}</div><div class="itemmain"><div class="row"><div class="itemtitle">${esc(g.title)}</div>${g.priority==='Must have'?'<span>🔥</span>':''}</div><div class="chips"><span class="chip">${esc(g.platform)}</span><span class="chip">${esc(g.region)}</span><span class="chip">${esc(g.edition)}</span><span class="chip">${esc(g.condition)}</span></div><div class="row"><span class="muted">${g.ean?`EAN ${esc(g.ean)}`:'Brak EAN'}</span><span class="price">${money(g.value)}</span></div><div class="actions"><button class="secondary" onclick="editGame('${g.id}')">Edytuj</button><button class="secondary" onclick="toggleWish('${g.id}')">${g.wish?'↩ Kolekcja':'♥ Wishlist'}</button><button class="danger" onclick="removeGame('${g.id}')">Usuń</button></div></div></article>`;
+}
+function toolsPage(){return `<div class="section"><h3>⚙ Narzędzia</h3></div><div class="list">
+<div class="item"><div class="itemmain"><div class="itemtitle">📷 Skaner EAN</div><p class="muted">Skanuj kod z pudełka i automatycznie wpisz go do formularza.</p><button class="red" onclick="startScanner()">Uruchom skaner</button></div></div>
+<div class="item"><div class="itemmain"><div class="itemtitle">💾 Kopia zapasowa</div><p class="muted">Eksportuj kolekcję do pliku JSON i zachowaj ją poza telefonem.</p><button onclick="exportData()">Eksportuj</button> <button class="secondary" onclick="openImport()">Importuj</button></div></div>
+<div class="item"><div class="itemmain"><div class="itemtitle">📊 Statystyki</div><p class="muted">Łączna liczba: <b>${games.length}</b> · wartość: <b>${money(games.reduce((s,g)=>s+(+g.value||0),0))}</b></p></div></div>
+</div>`}
+function openForm(wish=false,g=null){
+ $('formOverlay').classList.add('open');$('formTitle').textContent=g?'Edytuj grę':wish?'Dodaj do Wishlisty':'Dodaj grę';$('gameForm').dataset.wish=wish?'1':'0';
+ ['editId','title','ean','buy','value','date','shop','notes'].forEach(id=>$(id).value=g?.[id.replace('editId','id')]??'');
+ $('editId').value=g?.id||'';$('platform').value=g?.platform||'Switch';$('region').value=g?.region||'PAL / EU';$('condition').value=g?.condition||'Used';$('edition').value=g?.edition||'Standard';$('priority').value=g?.priority||'Normalny';$('photo').value='';
+}
+function closeForm(){$('formOverlay').classList.remove('open')}
+$('gameForm').addEventListener('submit',e=>{e.preventDefault();const id=$('editId').value||crypto.randomUUID();const old=games.find(x=>x.id===id);const file=$('photo').files[0];const base={id,title:$('title').value.trim(),platform:$('platform').value,region:$('region').value,condition:$('condition').value,edition:$('edition').value,ean:$('ean').value.trim(),buy:+$('buy').value||0,value:+$('value').value||0,date:$('date').value,priority:$('priority').value,shop:$('shop').value.trim(),notes:$('notes').value.trim(),collection:old ? old.collection!==false : $('gameForm').dataset.wish!=='1',wish:$('gameForm').dataset.wish==='1'||old?.wish||false,photo:old?.photo||''};const finish=photo=>{base.photo=photo||base.photo;if(old)games=games.map(x=>x.id===id?base:x);else games.push(base);save();closeForm();render();toast('Zapisano grę ✓')};if(file){const r=new FileReader();r.onload=()=>finish(r.result);r.readAsDataURL(file)}else finish()});
+function editGame(id){const g=games.find(x=>x.id===id);if(g)openForm(false,g)}
+function toggleWish(id){const g=games.find(x=>x.id===id);if(!g)return;g.wish=!g.wish;if(!g.wish&&g.collection===false)games=games.filter(x=>x.id!==id);save();render();toast(g.wish?'Dodano do Wishlisty ♥':'Przeniesiono do kolekcji')}
+function removeGame(id){if(confirm('Usunąć tę grę?')){games=games.filter(x=>x.id!==id);save();render();}}
+function startScanner(){
+ $('scanOverlay').classList.add('open');$('scanStatus').textContent='Uruchamianie aparatu…';
+ if(!navigator.mediaDevices?.getUserMedia){$('scanStatus').textContent='Aparat nie jest dostępny. Wpisz EAN ręcznie.';return}
+ navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}}}).then(stream=>{scanStream=stream;$('video').srcObject=stream;$('video').play();beginDetect()}).catch(()=>{$('scanStatus').textContent='Brak zgody na aparat. Wpisz EAN ręcznie.'});
+}
+function beginDetect(){
+ if('BarcodeDetector' in window){BarcodeDetector.getSupportedFormats().then(formats=>{const wanted=formats.filter(x=>['ean_13','ean_8','upc_a','upc_e'].includes(x));if(!wanted.length){fallbackScanner();return}const detector=new BarcodeDetector({formats:wanted});scanTimer=setInterval(async()=>{try{const codes=await detector.detect($('video'));if(codes[0]?.rawValue)gotBarcode(codes[0].rawValue)}catch(e){}},250);$('scanStatus').textContent='Szukam kodu…'}).catch(fallbackScanner)}else fallbackScanner()
+}
+function fallbackScanner(){
+  $('scanStatus').textContent='Uruchamiam skaner kompatybilny z iPhone…';
+  if(window.Html5Qrcode){
+    const box=document.createElement('div'); box.id='qr-fallback'; box.style.cssText='position:absolute;inset:0;background:#050505;';
+    $('video').style.display='none'; $('video').parentElement.appendChild(box);
+    const qr=new Html5Qrcode('qr-fallback'); window._qr=qr;
+    qr.start({facingMode:'environment'},
+      {fps:10,qrbox:{width:240,height:160},formatsToSupport:[Html5QrcodeSupportedFormats.EAN_13,Html5QrcodeSupportedFormats.EAN_8,Html5QrcodeSupportedFormats.UPC_A,Html5QrcodeSupportedFormats.UPC_E]},
+      code=>{qr.stop().catch(()=>{});box.remove();$('video').style.display='block';gotBarcode(code)},()=>{}
+    ).then(()=>{$('scanStatus').textContent='Szukam kodu…'}).catch(()=>{$('scanStatus').textContent='Nie udało się uruchomić aparatu. Wpisz EAN ręcznie.'});
+  } else $('scanStatus').textContent='Skaner jest niedostępny. Wpisz EAN ręcznie.';
+}
+function gotBarcode(code){clearInterval(scanTimer);$('ean').value=code;stopScanner();openForm(false);toast('Zeskanowano EAN: '+code)}
+function stopScanner(){clearInterval(scanTimer);if(window._qr){window._qr.stop().catch(()=>{});window._qr=null}const fb=document.getElementById('qr-fallback');if(fb)fb.remove();$('video').style.display='block';if(scanStream)scanStream.getTracks().forEach(t=>t.stop());scanStream=null;$('scanOverlay').classList.remove('open')}
+function manualScan(){const code=prompt('Wpisz numer EAN / UPC:');if(code){stopScanner();openForm(false);$('ean').value=code.replace(/\\D/g,'')}}
+function exportData(){const blob=new Blob([JSON.stringify({version:3,exported:new Date().toISOString(),games},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nintendo-vault-backup.json';a.click();URL.revokeObjectURL(a.href)}
+function openImport(){$('importOverlay').classList.add('open')}function closeImport(){$('importOverlay').classList.remove('open')}
+function doImport(){const f=$('importFile').files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.games))throw 0;games=d.games;save();closeImport();render();toast('Import zakończony ✓')}catch(e){alert('Nieprawidłowy plik kopii zapasowej.')}};r.readAsText(f)}
 render();
-</script>
-<div class="install-banner" id="installBanner"><span>📱 <b>Zainstaluj Nintendo Vault</b></span><button id="installBtn">Zainstaluj</button><button id="closeInstall" style="background:transparent;padding:6px">×</button></div>
-<script>
-let deferredInstallPrompt=null;
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredInstallPrompt=e;document.getElementById('installBanner').style.display='flex';});
-document.getElementById('installBtn').onclick=async()=>{if(deferredInstallPrompt){deferredInstallPrompt.prompt();await deferredInstallPrompt.userChoice;deferredInstallPrompt=null;}document.getElementById('installBanner').style.display='none';};
-document.getElementById('closeInstall').onclick=()=>document.getElementById('installBanner').style.display='none';
-if('serviceWorker' in navigator && location.protocol!=='file:'){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
 </script>
 </body></html>
