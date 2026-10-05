@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Nintendo Vault V4</title>
+<style>
+:root{--bg:#f4f5f7;--card:#fff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--accent:#e60012;--dark:#111827;--good:#15803d;--warn:#b45309}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:14px 16px}
+.brand{display:flex;align-items:center;justify-content:space-between}.brand h1{font-size:20px;margin:0}.brand small{color:var(--muted)}
+main{max-width:900px;margin:auto;padding:16px 16px 92px}.hero{background:var(--dark);color:white;border-radius:22px;padding:20px;margin-bottom:16px}.hero h2{margin:0 0 5px;font-size:27px}.hero p{margin:0;color:#cbd5e1}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.stat{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:14px}.stat b{display:block;font-size:22px;margin-top:4px}.muted{color:var(--muted)}
+.tabs{position:fixed;bottom:0;left:0;right:0;z-index:30;background:rgba(255,255,255,.96);backdrop-filter:blur(16px);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);padding:7px max(7px,env(safe-area-inset-left)) calc(7px + env(safe-area-inset-bottom))}
+.tab{border:0;background:none;padding:7px 3px;color:var(--muted);font-size:11px}.tab.active{color:var(--accent);font-weight:700}.tab span{display:block;font-size:21px;margin-bottom:2px}
+.section{margin:18px 0 10px;display:flex;align-items:center;justify-content:space-between}.section h3{margin:0;font-size:18px}
+button,.button{border:0;border-radius:12px;padding:11px 14px;background:var(--dark);color:white;font-weight:650}.button.red{background:var(--accent)}button.secondary{background:#eef0f3;color:var(--text)}button.danger{background:#fee2e2;color:#991b1b}
+.list{display:grid;gap:10px}.item{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:13px;display:flex;gap:12px}.cover{width:64px;height:84px;border-radius:9px;background:#e5e7eb;display:grid;place-items:center;overflow:hidden;flex:none}.cover img{width:100%;height:100%;object-fit:cover}.itemmain{min-width:0;flex:1}.itemtitle{font-weight:750;font-size:16px}.chips{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0}.chip{background:#f1f5f9;border-radius:999px;padding:4px 7px;font-size:11px}.price{font-weight:750}.row{display:flex;gap:8px;align-items:center;justify-content:space-between}.actions{display:flex;gap:6px;margin-top:8px}.actions button{padding:7px 9px;font-size:12px}
+input,select,textarea{width:100%;border:1px solid #d1d5db;background:white;border-radius:11px;padding:11px;font:inherit;color:var(--text)}textarea{min-height:80px;resize:vertical}label{font-size:12px;font-weight:650;color:#374151;display:block;margin:10px 0 5px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.full{grid-column:1/-1}
+.searchbar{display:flex;gap:8px}.searchbar input{flex:1}.empty{padding:28px;text-align:center;color:var(--muted);background:white;border:1px dashed #d1d5db;border-radius:17px}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;display:none;align-items:flex-end}.overlay.open{display:flex}.sheet{background:white;width:100%;max-height:92vh;overflow:auto;border-radius:22px 22px 0 0;padding:18px 16px calc(28px + env(safe-area-inset-bottom))}.sheet h2{margin:0 0 8px}.close{float:right;background:#eef0f3;color:#111}
+.scanner{background:#050505;border-radius:18px;overflow:hidden;position:relative;margin:10px 0}.scanner video{width:100%;display:block;aspect-ratio:1/1;object-fit:cover}.scanline{position:absolute;left:10%;right:10%;top:50%;height:2px;background:#fff}.scanstatus{color:#fff;text-align:center;padding:8px;font-size:13px}
+.toast{position:fixed;left:50%;bottom:85px;transform:translateX(-50%);background:#111827;color:white;padding:10px 15px;border-radius:999px;z-index:200;display:none}
+@media(min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}.tabs{position:static;max-width:900px;margin:auto;border:0;background:none}.tab{font-size:13px}.tab span{display:inline;margin-right:5px}main{padding-bottom:20px}.overlay{align-items:center;justify-content:center}.sheet{max-width:650px;border-radius:22px}}
+</style>
+<script src="https://unpkg.com/html5-qrcode" defer></script>
+</head>
+<body>
+<header><div class="brand"><div><h1>🎮 Nintendo Vault</h1><small>Kolekcjoner Edition · V3</small></div><button class="red" onclick="openForm()">＋ Dodaj</button></div></header>
+<main id="app"></main>
+<nav class="tabs">
+<button class="tab active" data-tab="home" onclick="showTab('home')"><span>⌂</span>Start</button>
+<button class="tab" data-tab="collection" onclick="showTab('collection')"><span>🎮</span>Kolekcja</button>
+<button class="tab" data-tab="wishlist" onclick="showTab('wishlist')"><span>♥</span>Wishlist</button>
+<button class="tab" data-tab="tools" onclick="showTab('tools')"><span>⚙</span>Narzędzia</button>
+</nav>
+
+<div class="overlay" id="formOverlay"><div class="sheet"><button class="close" onclick="closeForm()">✕</button><h2 id="formTitle">Dodaj grę</h2>
+<form id="gameForm">
+<input type="hidden" id="editId">
+<div class="formgrid">
+<div class="full"><label>Tytuł *</label><input id="title" required placeholder="np. The Legend of Zelda: Tears of the Kingdom"></div>
+<div><label>Platforma</label><select id="platform"><option>Switch</option><option>Switch 2</option><option>3DS</option><option>Wii U</option><option>Wii</option><option>DS</option><option>Game Boy</option><option>GameCube</option><option>Inne</option></select></div>
+<div><label>Region</label><select id="region"><option>PAL / EU</option><option>USA</option><option>Japan</option><option>UK</option><option>Inny</option></select></div>
+<div><label>Stan</label><select id="condition"><option>Used</option><option>New</option><option>Sealed</option></select></div>
+<div><label>Edycja</label><select id="edition"><option>Standard</option><option>Limited</option><option>Collector's</option><option>Special</option><option>Steelbook</option><option>Inna</option></select></div>
+<div><label>EAN / kod</label><input id="ean" inputmode="numeric" placeholder="np. 0454964201234" onblur="lookupEAN(this.value,false)"><div id="eanStatus" class="muted" style="font-size:12px;margin-top:5px"></div></div>
+<div><label>Cena zakupu (PLN)</label><input id="buy" type="number" step="0.01" min="0"></div>
+<div><label>Aktualna wartość (PLN)</label><input id="value" type="number" step="0.01" min="0"></div>
+<div><label>Data zakupu</label><input id="date" type="date"></div>
+<div><label>Priorytet</label><select id="priority"><option>Normalny</option><option>Wysoki</option><option>Must have</option></select></div>
+<div class="full"><label>Sklep / źródło</label><input id="shop" placeholder="np. Allegro, sklep, wymiana"></div>
+<div class="full"><label>Notatka</label><textarea id="notes"></textarea></div>
+<div class="full"><label>Zdjęcie pudełka</label><input id="photo" type="file" accept="image/*" capture="environment"></div>
+</div>
+<div class="actions" style="margin-top:15px"><button class="red" type="submit">Zapisz grę</button><button type="button" class="secondary" onclick="closeForm()">Anuluj</button></div>
+</form></div></div>
+
+<div class="overlay" id="scanOverlay"><div class="sheet"><button class="close" onclick="stopScanner()">✕</button><h2>📷 Skanuj kod kreskowy</h2><p class="muted">Skieruj aparat na EAN-13 / UPC znajdujący się na pudełku.</p>
+<div class="scanner"><video id="video" playsinline muted></video><div class="scanline"></div><div class="scanstatus" id="scanStatus">Uruchamianie aparatu…</div></div>
+<button class="secondary" onclick="manualScan()">Wpisz EAN ręcznie</button>
+</div></div>
+
+<div class="overlay" id="importOverlay"><div class="sheet"><button class="close" onclick="closeImport()">✕</button><h2>Import kolekcji</h2><p class="muted">Wybierz wcześniej wyeksportowany plik JSON.</p><input id="importFile" type="file" accept="application/json"><div class="actions"><button class="red" onclick="doImport()">Importuj</button></div></div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY='nintendo-vault-v3';
+let games=JSON.parse(localStorage.getItem(KEY)||'[]');
+let activeTab='home', scanStream=null, scanTimer=null;
+
+const $=id=>document.getElementById(id);
+const money=n=>new Intl.NumberFormat('pl-PL',{style:'currency',currency:'PLN',maximumFractionDigits:0}).format(Number(n)||0);
+const save=()=>localStorage.setItem(KEY,JSON.stringify(games));
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+function toast(t){$('toast').textContent=t;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2200)}
+function showTab(tab){activeTab=tab;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===tab));render()}
+function render(){
+ const total=games.reduce((s,g)=>s+(+g.value||0),0), invested=games.reduce((s,g)=>s+(+g.buy||0),0);
+ if(activeTab==='home') $('app').innerHTML=home(total,invested);
+ if(activeTab==='collection') $('app').innerHTML=listPage(false);
+ if(activeTab==='wishlist') $('app').innerHTML=listPage(true);
+ if(activeTab==='tools') $('app').innerHTML=toolsPage();
+}
+function home(total,invested){
+ const platforms={};games.forEach(g=>platforms[g.platform]=(platforms[g.platform]||0)+1);
+ const gain=total-invested;
+ return `<section class="hero"><h2>Twoja kolekcja</h2><p>Wszystko, co kolekcjonujesz, w jednym miejscu.</p></section>
+ <div class="grid"><div class="stat"><span class="muted">Gry</span><b>${games.length}</b></div><div class="stat"><span class="muted">Wartość</span><b>${money(total)}</b></div><div class="stat"><span class="muted">Zainwestowano</span><b>${money(invested)}</b></div><div class="stat"><span class="muted">Wzrost</span><b>${money(gain)}</b></div></div>
+ <div class="section"><h3>Ostatnio dodane</h3><button class="secondary" onclick="showTab('collection')">Wszystkie</button></div>
+ <div class="list">${games.slice().reverse().slice(0,5).map(card).join('')||'<div class="empty">Twoja kolekcja jest pusta.<br><br><button class="red" onclick="openForm()">Dodaj pierwszą grę</button></div>'}</div>
+ <div class="section"><h3>Platformy</h3></div><div class="chips">${Object.entries(platforms).map(([p,n])=>`<span class="chip">${esc(p)} · ${n}</span>`).join('')||'<span class="muted">Brak danych</span>'}</div>`;
+}
+function listPage(wish){
+ let arr=games.filter(g=>wish?g.wish:g.collection!==false);
+ return `<div class="section"><h3>${wish?'♥ Wishlist':'🎮 Moja kolekcja'}</h3><div style="display:flex;gap:6px"><button class="red" onclick="openForm(${wish})">＋</button>${wish?'':'<button class="secondary" onclick="startScanner()">📷</button>'}</div></div>
+ <div class="searchbar"><input id="search" placeholder="Szukaj tytułu, EAN, platformy…" oninput="filterList(${wish})"><button class="secondary" onclick="sortList()">↕</button></div>
+ <div id="results" class="list" style="margin-top:10px">${arr.map(card).join('')||`<div class="empty">${wish?'Wishlist jest pusta. Dodaj gry, które chcesz kupić.':'Nie masz jeszcze żadnych gier w kolekcji.'}</div>`}</div>`;
+}
+function filterList(wish){const q=($('search')?.value||'').toLowerCase();const arr=games.filter(g=>(wish?g.wish:g.collection!==false)&&[g.title,g.ean,g.platform,g.edition,g.region].join(' ').toLowerCase().includes(q));$('results').innerHTML=arr.map(card).join('')||'<div class="empty">Brak wyników.</div>'}
+function sortList(){if(games.length>1){games.reverse();save();render();toast('Zmieniono kolejność')}}
+function card(g){
+ return `<article class="item"><div class="cover">${g.photo?`<img src="${g.photo}" alt="">`:'🎮'}</div><div class="itemmain"><div class="row"><div class="itemtitle">${esc(g.title)}</div>${g.priority==='Must have'?'<span>🔥</span>':''}</div><div class="chips"><span class="chip">${esc(g.platform)}</span><span class="chip">${esc(g.region)}</span><span class="chip">${esc(g.edition)}</span><span class="chip">${esc(g.condition)}</span></div><div class="row"><span class="muted">${g.ean?`EAN ${esc(g.ean)}`:'Brak EAN'}</span><span class="price">${money(g.value)}</span></div><div class="actions"><button class="secondary" onclick="editGame('${g.id}')">Edytuj</button><button class="secondary" onclick="toggleWish('${g.id}')">${g.wish?'↩ Kolekcja':'♥ Wishlist'}</button><button class="danger" onclick="removeGame('${g.id}')">Usuń</button></div></div></article>`;
+}
+function toolsPage(){return `<div class="section"><h3>⚙ Narzędzia</h3></div><div class="list">
+<div class="item"><div class="itemmain"><div class="itemtitle">📷 Skaner EAN</div><p class="muted">Skanuj kod z pudełka i automatycznie wpisz go do formularza.</p><button class="red" onclick="startScanner()">Uruchom skaner</button></div></div>
+<div class="item"><div class="itemmain"><div class="itemtitle">💾 Kopia zapasowa</div><p class="muted">Eksportuj kolekcję do pliku JSON i zachowaj ją poza telefonem.</p><button onclick="exportData()">Eksportuj</button> <button class="secondary" onclick="openImport()">Importuj</button></div></div>
+<div class="item"><div class="itemmain"><div class="itemtitle">📊 Statystyki</div><p class="muted">Łączna liczba: <b>${games.length}</b> · wartość: <b>${money(games.reduce((s,g)=>s+(+g.value||0),0))}</b></p></div></div>
+</div>`}
+function openForm(wish=false,g=null){
+ $('formOverlay').classList.add('open');$('formTitle').textContent=g?'Edytuj grę':wish?'Dodaj do Wishlisty':'Dodaj grę';$('gameForm').dataset.wish=wish?'1':'0';
+ ['editId','title','ean','buy','value','date','shop','notes'].forEach(id=>$(id).value=g?.[id.replace('editId','id')]??'');
+ $('editId').value=g?.id||'';$('platform').value=g?.platform||'Switch';$('region').value=g?.region||'PAL / EU';$('condition').value=g?.condition||'Used';$('edition').value=g?.edition||'Standard';$('priority').value=g?.priority||'Normalny';$('photo').value='';$('photo').dataset.remote='';$('eanStatus').textContent='';
+}
+function closeForm(){$('formOverlay').classList.remove('open')}
+$('gameForm').addEventListener('submit',e=>{e.preventDefault();const id=$('editId').value||crypto.randomUUID();const old=games.find(x=>x.id===id);const file=$('photo').files[0];const remotePhoto=$('photo').dataset.remote||'';const base={id,title:$('title').value.trim(),platform:$('platform').value,region:$('region').value,condition:$('condition').value,edition:$('edition').value,ean:$('ean').value.trim(),buy:+$('buy').value||0,value:+$('value').value||0,date:$('date').value,priority:$('priority').value,shop:$('shop').value.trim(),notes:$('notes').value.trim(),collection:old ? old.collection!==false : $('gameForm').dataset.wish!=='1',wish:$('gameForm').dataset.wish==='1'||old?.wish||false,photo:old?.photo||remotePhoto};const finish=photo=>{base.photo=photo||base.photo;if(old)games=games.map(x=>x.id===id?base:x);else games.push(base);save();closeForm();render();toast('Zapisano grę ✓')};if(file){const r=new FileReader();r.onload=()=>finish(r.result);r.readAsDataURL(file)}else finish()});
+function editGame(id){const g=games.find(x=>x.id===id);if(g)openForm(false,g)}
+function toggleWish(id){const g=games.find(x=>x.id===id);if(!g)return;g.wish=!g.wish;if(!g.wish&&g.collection===false)games=games.filter(x=>x.id!==id);save();render();toast(g.wish?'Dodano do Wishlisty ♥':'Przeniesiono do kolekcji')}
+function removeGame(id){if(confirm('Usunąć tę grę?')){games=games.filter(x=>x.id!==id);save();render();}}
+function startScanner(){
+ $('scanOverlay').classList.add('open');$('scanStatus').textContent='Uruchamianie aparatu…';
+ if(!navigator.mediaDevices?.getUserMedia){$('scanStatus').textContent='Aparat nie jest dostępny. Wpisz EAN ręcznie.';return}
+ navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'}}}).then(stream=>{scanStream=stream;$('video').srcObject=stream;$('video').play();beginDetect()}).catch(()=>{$('scanStatus').textContent='Brak zgody na aparat. Wpisz EAN ręcznie.'});
+}
+function beginDetect(){
+ if('BarcodeDetector' in window){BarcodeDetector.getSupportedFormats().then(formats=>{const wanted=formats.filter(x=>['ean_13','ean_8','upc_a','upc_e'].includes(x));if(!wanted.length){fallbackScanner();return}const detector=new BarcodeDetector({formats:wanted});scanTimer=setInterval(async()=>{try{const codes=await detector.detect($('video'));if(codes[0]?.rawValue)gotBarcode(codes[0].rawValue)}catch(e){}},250);$('scanStatus').textContent='Szukam kodu…'}).catch(fallbackScanner)}else fallbackScanner()
+}
+function fallbackScanner(){
+  $('scanStatus').textContent='Uruchamiam skaner kompatybilny z iPhone…';
+  if(window.Html5Qrcode){
+    const box=document.createElement('div'); box.id='qr-fallback'; box.style.cssText='position:absolute;inset:0;background:#050505;';
+    $('video').style.display='none'; $('video').parentElement.appendChild(box);
+    const qr=new Html5Qrcode('qr-fallback'); window._qr=qr;
+    qr.start({facingMode:'environment'},
+      {fps:10,qrbox:{width:240,height:160},formatsToSupport:[Html5QrcodeSupportedFormats.EAN_13,Html5QrcodeSupportedFormats.EAN_8,Html5QrcodeSupportedFormats.UPC_A,Html5QrcodeSupportedFormats.UPC_E]},
+      code=>{qr.stop().catch(()=>{});box.remove();$('video').style.display='block';gotBarcode(code)},()=>{}
+    ).then(()=>{$('scanStatus').textContent='Szukam kodu…'}).catch(()=>{$('scanStatus').textContent='Nie udało się uruchomić aparatu. Wpisz EAN ręcznie.'});
+  } else $('scanStatus').textContent='Skaner jest niedostępny. Wpisz EAN ręcznie.';
+}
+async function lookupEAN(code, autoOpen=true){
+ code=String(code||'').replace(/\D/g,''); if(!code)return;
+ if(autoOpen && !$('formOverlay').classList.contains('open')) openForm(false);
+ $('ean').value=code; const status=$('eanStatus'); if(status)status.textContent='🔎 Szukam gry po EAN…';
+ try{
+  const cache=JSON.parse(localStorage.getItem('nintendo-vault-ean-cache')||'{}'); let data=cache[code];
+  if(!data){const r=await fetch('https://api.upcitemdb.com/prod/trial/lookup?upc='+encodeURIComponent(code),{headers:{'Accept':'application/json'}}); if(!r.ok)throw new Error('API '+r.status); data=await r.json(); cache[code]=data; localStorage.setItem('nintendo-vault-ean-cache',JSON.stringify(cache));}
+  const item=data?.items?.[0];
+  if(!item){if(status)status.textContent='⚠️ Nie znaleziono produktu — uzupełnij dane ręcznie.';return false}
+  if(item.title && !$('editId').value) $('title').value=item.title;
+  if(item.images?.[0] && !$('photo').files.length && !$('editId').value) $('photo').dataset.remote=item.images[0];
+  const t=(item.title||'').toLowerCase();
+  if(t.includes('switch 2'))$('platform').value='Switch 2'; else if(t.includes('nintendo switch')||t.includes('switch'))$('platform').value='Switch'; else if(t.includes('3ds'))$('platform').value='3DS'; else if(t.includes('wii u'))$('platform').value='Wii U'; else if(t.includes('wii'))$('platform').value='Wii'; else if(t.includes('ds'))$('platform').value='DS';
+  if(/collector|collectors|limited|special|steelbook/i.test(item.title||'')){if(/steelbook/i.test(item.title||''))$('edition').value='Steelbook';else if(/collector/i.test(item.title||''))$('edition').value="Collector's";else if(/limited/i.test(item.title||''))$('edition').value='Limited';else $('edition').value='Special';}
+  if(status)status.textContent='✅ Znaleziono: '+item.title+(item.brand?' · '+item.brand:''); toast('Rozpoznano grę po EAN ✓'); return true;
+ }catch(e){if(status)status.textContent='⚠️ Baza niedostępna. Dane możesz wpisać ręcznie.';return false;}
+}
+function gotBarcode(code){clearInterval(scanTimer);stopScanner();openForm(false);$('ean').value=code;lookupEAN(code,true);toast('Zeskanowano EAN: '+code)}
+function stopScanner(){clearInterval(scanTimer);if(window._qr){window._qr.stop().catch(()=>{});window._qr=null}const fb=document.getElementById('qr-fallback');if(fb)fb.remove();$('video').style.display='block';if(scanStream)scanStream.getTracks().forEach(t=>t.stop());scanStream=null;$('scanOverlay').classList.remove('open')}
+function manualScan(){const code=prompt('Wpisz numer EAN / UPC:');if(code){stopScanner();openForm(false);$('ean').value=code.replace(/\D/g,'')}}
+function exportData(){const blob=new Blob([JSON.stringify({version:4,exported:new Date().toISOString(),games},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='nintendo-vault-backup.json';a.click();URL.revokeObjectURL(a.href)}
+function openImport(){$('importOverlay').classList.add('open')}function closeImport(){$('importOverlay').classList.remove('open')}
+function doImport(){const f=$('importFile').files[0];if(!f)return;const r=new FileReader();r.onload=()=>{try{const d=JSON.parse(r.result);if(!Array.isArray(d.games))throw 0;games=d.games;save();closeImport();render();toast('Import zakończony ✓')}catch(e){alert('Nieprawidłowy plik kopii zapasowej.')}};r.readAsText(f)}
+render();
+</script>
+</body></html>
